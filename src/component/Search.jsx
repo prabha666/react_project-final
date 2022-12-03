@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
+// import axios from "axios";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -10,11 +10,15 @@ function App() {
   useEffect(() => {
     const loadPosts = async () => {
       setLoading(true);
-      const response = await axios.get(
+      const response = await fetch(
         "https://fakestoreapi.com/products"
-      );
-      setPosts(response.data);
+      ).then((response)=>{
+        response.json().then((result)=>{
+           setPosts(response.data);
       setLoading(false);
+        })
+      })
+     
     };
 
     loadPosts();
